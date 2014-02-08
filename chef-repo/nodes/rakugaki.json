@@ -1,0 +1,19 @@
+{
+  "mysql": {
+    "server_root_password": "hogehoge",
+    "server_repl_password": "hogehoge",
+    "server_debian_password": "hogehoge",
+    "app_user_password": "hogehoge"
+  },
+  "play": {
+    "dir": "/opt/play",
+    "user": "rakugaki",
+    "group": "rakugaki",
+    "version": "2.2.1"
+  },
+  "run_list":[
+    "recipe[rakugaki]",
+    "recipe[my_mysql]",
+    "recipe[playframework]"
+  ]
+}
