@@ -9,9 +9,16 @@
 
 # Initialize app user
 user 'rakugaki' do
+  supports  :manage_home => true
   comment   'rakugaki user'
   uid       599
   password  'rakugaki'
-  supports  :manage_home => true
+  shell     "/bin/bash"
   action    [:create, :manage]
+end
+
+# make symbolic link from app
+link "/home/rakugaki/rakugaki" do
+  to     "/opt/rakugaki"
+  action :create
 end

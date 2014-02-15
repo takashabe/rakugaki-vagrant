@@ -11,8 +11,8 @@ include_recipe 'mysql::server'
 include_recipe 'database::mysql'
 
 service "mysqld" do
-  supports:status=>true, :restart=>true, :reload=>true
-  action [:enable, :start]
+  supports :status=>true, :restart=>true, :reload=>true
+  action [:enable, :restart]
 end
 
 mysql_connection_info = {

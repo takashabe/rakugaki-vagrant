@@ -11,6 +11,10 @@
     "group": "rakugaki",
     "version": "2.2.1"
   },
+  "app": {
+    "src_dir": "/opt/rakugaki",
+    "dst_dir": "/home/rakugaki/rakugaki"
+  },
   "run_list":[
     "recipe[rakugaki]",
     "recipe[my_mysql]",

@@ -16,7 +16,8 @@ bash 'timezone change' do
 end
 
 service 'iptables' do
-  action :stop
+  supports :restart => true, :status => true, :reload => true
+  action [:stop, :disable]
 end
 
 ['java-1.7.0-openjdk', 'java-1.7.0-openjdk-devel', 'git', 'unzip'].each do |pkg|
@@ -53,7 +54,7 @@ bash "unzip play zip" do
   code <<-EOH
     unzip #{play_source_dir}/#{play_file_name}
     mv #{play_source_dir}/play-#{node['play']['version']} /usr/local/bin
-    chown -R sandbox:sandbox /usr/local/bin/play-#{node['play']['version']}
+    chown -R rakugaki:rakugaki /usr/local/bin/play-#{node['play']['version']}
     ln -s /usr/local/bin/play-#{node['play']['version']}/play /usr/bin/play
   EOH
   not_if "which play"
