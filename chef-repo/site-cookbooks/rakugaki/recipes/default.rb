@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'yum-remi'
+
 # Initialize app user
 user 'rakugaki' do
   supports  :manage_home => true
@@ -21,4 +23,9 @@ end
 link "/home/rakugaki/rakugaki" do
   to     "/opt/rakugaki"
   action :create
+end
+
+# Upgrade MySQL
+package "mysql-server" do
+  action :upgrade
 end

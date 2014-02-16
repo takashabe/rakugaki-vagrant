@@ -16,6 +16,7 @@
     "dst_dir": "/home/rakugaki/rakugaki"
   },
   "run_list":[
+    "recipe[yum-remi]",
     "recipe[rakugaki]",
     "recipe[my_mysql]",
     "recipe[playframework]"
