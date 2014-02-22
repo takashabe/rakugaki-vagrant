@@ -1,6 +1,7 @@
 site :opscode
 
-cookbook 'mysql'
-cookbook 'database'
+cookbook 'yum'
+cookbook 'yum-epel'
+cookbook 'yum-remi', github: 'takashabe/yum-remi'
 cookbook 'nginx'
 cookbook 'java'

@@ -1,10 +1,4 @@
 {
-  "mysql": {
-    "server_root_password": "hogehoge",
-    "server_repl_password": "hogehoge",
-    "server_debian_password": "hogehoge",
-    "app_user_password": "hogehoge"
-  },
   "play": {
     "dir": "/opt/play",
     "user": "rakugaki",
@@ -16,7 +10,6 @@
     "dst_dir": "/home/rakugaki/rakugaki"
   },
   "run_list":[
-    "recipe[yum-remi]",
     "recipe[rakugaki]",
     "recipe[my_mysql]",
     "recipe[playframework]"
