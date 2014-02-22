@@ -1,11 +1,11 @@
-my_mysql CHANGELOG
-==================
+setup-mysql CHANGELOG
+=====================
 
-This file is used to list changes made in each version of the my_mysql cookbook.
+This file is used to list changes made in each version of the setup-mysql cookbook.
 
 0.1.0
 -----
-- [your_name] - Initial release of my_mysql
+- [your_name] - Initial release of setup-mysql
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
