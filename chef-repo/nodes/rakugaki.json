@@ -16,11 +16,7 @@
     },
     "root": {
       "pass": "hogehoge"
-    },
-    "app_tables": {[
-        {"table": "user", "create": "create table user (user_id varchar(32) not null primary key)"},
-        {"table": "book", "create": "create table book (book_id varchar(32) not null primary key)"}
-    ]},
+    }
   },
   "run_list":[
     "recipe[rakugaki]",

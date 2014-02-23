@@ -22,37 +22,39 @@ service "mysqld" do
 end
 
 ### setup database
-# Initialize user password
-app_user_name = node["mysql"]["app_user"]["name"]
-app_user_pass = node["mysql"]["app_user"]["pass"]
-root_user_pass = node["mysql"]["root"]["pass"]
+# setup connection
+root_conn = "mysql -u root --password=\"#{node['setup-mysql']['params']['root_pass']}\""
+app_conn  = "mysql -u #{node['setup-mysql']['params']['app_user']} --password=\"#{node['setup-mysql']['params']['app_pass']}\""
 
-# Set connection
-root_conn = "mysql -uroot"
-app_conn  = "mysql -u#{app_user_name} -p#{app_user_pass}"
-
-script "create_mysql_user" do
-  interpreter "bash"
-  not_if "#{app_conn}"
-  code <<-EOL
-  #{root_conn} << EOF
-  grant all privileges on *.* to #{app_user_name}@'localhost' identified by "#{app_user_pass}";
-  drop database test;
-  flush privileges;
-EOF
-  EOL
+# create user
+# execute create from template resource
+execute "mysql-create-user" do
+  only_if "which mysql"
+  command "#{root_conn} < /tmp/grants.sql"
+  action :nothing
 end
 
-node["mysql"]["app_tables"].each do |table|
-  create_statement = table["create"] << default["setup-mysql"]["create_suffix"]
-  p create_statement
-  # script "create_app_table" do
-    # interpreter "bash"
-    # not_if "#{app_conn} -e 'desc #{create_mysql_user}'"
-    # code <<-EOL
-    # #{app_conn} << EOF
-    # #{table["create"]}
-# EOF
-    # EOL
-  # end
+template "/tmp/grants.sql" do
+  owner "root"
+  group "root"
+  mode "0600"
+  variables(
+    :user     => node['setup-mysql']['params']['app_user'],
+    :password => node['setup-mysql']['params']['app_pass'],
+    :database => node['setup-mysql']['params']['database']
+  )
+  notifies :run, "execute[mysql-create-user]", :immediately
+end
+
+# create database
+# todo なるべくGemとか使わない方針で
+execute "mysql-create-database" do
+  command "/usr/bin/mysqladmin -u root create #{node['example']['db']['database']}"
+  not_if do
+    require 'rubygems'
+    Gem.clear_paths
+    require 'mysql'
+    m = Mysql.new(node['example']['db']['host'], "root", node['example']['db']['rootpass'])
+    m.list_dbs.include?(node['example']['db']['database'])
+  end
 end
