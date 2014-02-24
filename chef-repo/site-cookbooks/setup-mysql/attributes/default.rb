@@ -5,17 +5,20 @@ default['setup-mysql']['params']['database'] = 'rakugaki'
 default['setup-mysql']['params']['host'] = 'localhost'
 default['setup-mysql']['params']['root_pass'] = ''
 
-# create table statement
-default['setup-mysql']['create_table']['user'] =
-  <<-EOS
-    CREATE TABLE user (
-    user_id VARCHAR(32) NOT NULL PRIMARY KEY,
-    ENGINE=InnoDB character set utf8);
-  EOS
+# create database statement
+default['setup-mysql']['create-database']['rakugaki'] = <<-EOS
+  CREATE DATABASE IF NOT EXISTS rakugaki CHARACTER SET utf8 COLLATE utf8_general_ci;
+EOS
 
-default['setup-mysql']['create_table']['book'] =
-  <<-EOS
-    CREATE TABLE book (
-    book_id VARCHAR(32) NOT NULL PRIMARY KEY,
-    ENGINE=InnoDB character set utf8);
-  EOS
+# create table statement
+default['setup-mysql']['create-table']['user'] = <<-EOS
+  CREATE TABLE IF NOT EXISTS user (
+  user_id VARCHAR(32) NOT NULL PRIMARY KEY
+  ) ENGINE=InnoDB character set utf8;
+EOS
+
+default['setup-mysql']['create-table']['book'] = <<-EOS
+  CREATE TABLE IF NOT EXISTS book (
+  book_id VARCHAR(32) NOT NULL PRIMARY KEY
+  ) ENGINE=InnoDB character set utf8;
+EOS

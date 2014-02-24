@@ -47,14 +47,16 @@ template "/tmp/grants.sql" do
 end
 
 # create database
-# todo なるべくGemとか使わない方針で
 execute "mysql-create-database" do
-  command "/usr/bin/mysqladmin -u root create #{node['example']['db']['database']}"
-  not_if do
-    require 'rubygems'
-    Gem.clear_paths
-    require 'mysql'
-    m = Mysql.new(node['example']['db']['host'], "root", node['example']['db']['rootpass'])
-    m.list_dbs.include?(node['example']['db']['database'])
-  end
+  command "#{root_conn} -e '#{node['setup-mysql']['create-database']['rakugaki']}'"
+  only_if "which mysql"
+end
+
+# create tables
+execute "mysql-create-table" do
+  command <<-EOF
+  #{root_conn} -e 'use #{node['setup-mysql']['params']['database']}; #{node['setup-mysql']['create-table']['user']}'"
+  #{root_conn} -e 'use #{node['setup-mysql']['params']['database']}; #{node['setup-mysql']['create-table']['user']}'"
+  EOF
+  only_if "which mysql"
 end
