@@ -29,21 +29,18 @@ end
 # playframework attributes
 play_source_dir = node['play']['dir']
 play_file_name  = "play-#{node['play']['version']}.zip"
-source_url = "http://downloads.typesafe.com/play/#{node['play']['version']}/play-#{node['play']['version']}.zip"
-play_owner = node['play']['user']
-play_group = node['play']['group']
 
 # play install dir
 directory node['play']['dir'] do
-  owner  play_owner
-  group  play_group
+  owner  node['play']['user']
+  group  node['play']['group']
   mode   "0775"
   action :create
 end
 
 # Install play
 remote_file "#{play_source_dir}/#{play_file_name}" do
-  source source_url
+  source "http://downloads.typesafe.com/play/#{node['play']['version']}/play-#{node['play']['version']}.zip"
   mode "0644"
   not_if { File.exist?"#{play_source_dir}/#{play_file_name}" }
 end

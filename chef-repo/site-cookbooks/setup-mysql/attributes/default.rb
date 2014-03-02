@@ -1,5 +1,5 @@
 # database user parameter
-default['setup-mysql']['params']['app_user'] = 'username'
+default['setup-mysql']['params']['app_user'] = 'rakugaki'
 default['setup-mysql']['params']['app_pass'] = 'password'
 default['setup-mysql']['params']['database'] = 'rakugaki'
 default['setup-mysql']['params']['host'] = 'localhost'

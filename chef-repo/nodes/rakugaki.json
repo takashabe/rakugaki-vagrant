@@ -1,4 +1,11 @@
 {
+  "authorization": {
+    "sudo": {
+      "groups": ["vagrant", "rakugaki"],
+      "users": ["vagrant", "rakugaki"],
+      "passwordless": true
+    }
+  },
   "play": {
     "dir": "/opt/play",
     "user": "rakugaki",
@@ -21,6 +28,7 @@
   "run_list":[
     "recipe[rakugaki]",
     "recipe[setup-mysql]",
-    "recipe[playframework]"
+    "recipe[playframework]",
+    "recipe[sudo]"
   ]
 }

@@ -10,15 +10,28 @@
 # Initialize app user
 user 'rakugaki' do
   supports  :manage_home => true
-  comment   'rakugaki user'
-  uid       599
+  comment   'app user'
+  uid       550
   password  'rakugaki'
-  shell     "/bin/bash"
+  shell     '/bin/bash'
   action    [:create, :manage]
 end
 
+group 'rakugaki' do
+  group_name 'rakugaki'
+  gid        550
+  members    ['rakugaki']
+  action     [:create]
+end
+
+group 'vagrant' do
+  group_name 'vagrant'
+  members    ['rakugaki']
+  action     [:modify]
+end
+
 # make symbolic link from app
-link "/home/rakugaki/rakugaki" do
-  to     "/opt/rakugaki"
+link '/home/rakugaki/rakugaki' do
+  to     '/opt/rakugaki'
   action :create
 end

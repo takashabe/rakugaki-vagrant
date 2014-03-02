@@ -55,8 +55,8 @@ end
 # create tables
 execute "mysql-create-table" do
   command <<-EOF
-  #{root_conn} -e 'use #{node['setup-mysql']['params']['database']}; #{node['setup-mysql']['create-table']['user']}'"
-  #{root_conn} -e 'use #{node['setup-mysql']['params']['database']}; #{node['setup-mysql']['create-table']['user']}'"
+  #{root_conn} -e "use #{node['setup-mysql']['params']['database']}; #{node['setup-mysql']['create-table']['user']}"
+  #{root_conn} -e "use #{node['setup-mysql']['params']['database']}; #{node['setup-mysql']['create-table']['book']}"
   EOF
   only_if "which mysql"
 end
