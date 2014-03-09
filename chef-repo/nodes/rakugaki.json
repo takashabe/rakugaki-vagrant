@@ -10,7 +10,7 @@
     "dir": "/opt/play",
     "user": "rakugaki",
     "group": "rakugaki",
-    "version": "2.2.1"
+    "version": "2.2.2"
   },
   "app": {
     "src_dir": "/opt/rakugaki",
