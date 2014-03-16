@@ -29,6 +29,7 @@
     "recipe[rakugaki]",
     "recipe[setup-mysql]",
     "recipe[playframework]",
-    "recipe[sudo]"
+    "recipe[sudo]",
+    "recipe[oh-my-zsh]"
   ]
 }
