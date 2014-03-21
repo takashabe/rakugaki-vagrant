@@ -24,3 +24,8 @@ template "/home/rakugaki/.zshrc" do
   group "rakugaki"
   mode  "0755"
 end
+
+user "rakugaki" do
+  shell  "/bin/zsh"
+  action "modify"
+end
