@@ -60,3 +60,15 @@ end
   # EOF
   # only_if "which mysql"
 # end
+
+# Helper connection script
+directory "/home/rakugaki/bin/" do
+  owner "raugaki"
+  group "raugaki"
+  mode  "0775"
+end
+template "/home/rakugaki/bin/connect-service-database.sh" do
+  owner "rakugaki"
+  group "rakugaki"
+  mode  "0755"
+end
