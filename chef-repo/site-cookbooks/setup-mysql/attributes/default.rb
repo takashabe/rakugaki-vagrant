@@ -13,12 +13,18 @@ EOS
 # create table statement
 default['setup-mysql']['create-table']['user'] = <<-EOS
   CREATE TABLE IF NOT EXISTS user (
-  user_id VARCHAR(32) NOT NULL PRIMARY KEY
+  user_id VARCHAR(32) NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  PRIMARY KEY (user_id)
   ) ENGINE=InnoDB character set utf8;
 EOS
 
 default['setup-mysql']['create-table']['book'] = <<-EOS
   CREATE TABLE IF NOT EXISTS book (
-  book_id VARCHAR(32) NOT NULL PRIMARY KEY
+  book_id VARCHAR(32) NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  PRIMARY KEY (book_id)
   ) ENGINE=InnoDB character set utf8;
 EOS
